@@ -233,6 +233,7 @@ ScriptCommandTable:
 	dw Script_getname                    ; a7
 	dw Script_wait                       ; a8
 	dw Script_checksave                  ; a9
+	dw Script_getmontype                 ; aa
 
 StartScript:
 	ld hl, wScriptFlags
@@ -2360,3 +2361,29 @@ Script_checksave:
 
 .gs_version
 	db GS_VERSION
+
+Script_getmontype:
+	call GetScriptByte
+	ld [wCurSpecies], a
+	call GetBaseData
+	ld a, [wBaseType1]
+	ld [wNamedObjectIndexBuffer], a
+	predef GetTypeName
+	ld de, wStringBuffer1
+	call GetScriptByte
+	ld hl, wStringBuffer3
+	ld bc, wStringBuffer4 - wStringBuffer3
+	call AddNTimes
+.loop
+	ld a, [de]
+	cp "A"
+	jr c, .ok
+	cp "Z" + 1
+	jr nc, .ok
+	add "a" - "A"
+.ok
+	inc de
+	ld [hli], a
+	cp "@"
+	jr nz, .loop
+	ret

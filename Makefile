@@ -69,7 +69,14 @@ tools:
 	$(MAKE) -C tools/
 
 
-RGBASMFLAGS = -L -Weverything
+STARTER = TOTODILE
+DVS = FFFF
+
+RGBASMFLAGS = -L -Weverything -DSTARTER=$(STARTER) -DDVS=$(DVS)
+ifndef MANIPLESS
+RGBASMFLAGS += -DRNGHAX
+endif
+
 # Create a sym/map for debug purposes if `make` run with `DEBUG=1`
 ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E

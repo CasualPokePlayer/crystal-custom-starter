@@ -1192,6 +1192,11 @@ JohtoGrassWildMons:
 
 	map_id ROUTE_29
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+if DEF(RNGHAX)
+rept 14 ; morn/day
+	db 2, SENTRET
+endr
+else
 	; morn
 	db 2, PIDGEY
 	db 2, SENTRET
@@ -1208,6 +1213,7 @@ JohtoGrassWildMons:
 	db 2, RATTATA
 	db 3, HOPPIP
 	db 3, HOPPIP
+endc
 	; nite
 	db 2, HOOTHOOT
 	db 2, RATTATA
@@ -1219,6 +1225,14 @@ JohtoGrassWildMons:
 
 	map_id ROUTE_30
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+if DEF(RNGHAX)
+rept 14 ; morn/day
+	db 4, HOPPIP
+endr
+rept 7  ; nite
+	db 4, POLIWAG
+endr
+else
 	; morn
 	db 3, LEDYBA
 	db 3, CATERPIE
@@ -1243,9 +1257,18 @@ JohtoGrassWildMons:
 	db 3, ZUBAT
 	db 4, HOOTHOOT
 	db 4, HOOTHOOT
+endc
 
 	map_id ROUTE_31
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+if DEF(RNGHAX)
+rept 14 ; morn/day
+	db 5, BELLSPROUT
+endr
+rept 7  ; nite
+	db 4, POLIWAG
+endr
+else
 	; morn
 	db 4, LEDYBA
 	db 4, CATERPIE
@@ -1270,9 +1293,15 @@ JohtoGrassWildMons:
 	db 4, ZUBAT
 	db 5, GASTLY
 	db 5, GASTLY
+endc
 
 	map_id ROUTE_32
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite
+if DEF(RNGHAX)
+rept 21 ; morn/day/nite
+	db 7, BELLSPROUT
+endr
+else
 	; morn
 	db 4, EKANS
 	db 5, RATTATA
@@ -1297,6 +1326,7 @@ JohtoGrassWildMons:
 	db 7, HOOTHOOT
 	db 7, GASTLY
 	db 7, GASTLY
+endc
 
 	map_id ROUTE_33
 	db 10 percent, 10 percent, 10 percent ; encounter rates: morn/day/nite

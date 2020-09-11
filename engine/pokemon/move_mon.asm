@@ -201,11 +201,15 @@ endr
 	ld a, [wBattleMode]
 	and a
 	jr nz, .copywildmonDVs
-
+if DEF(RNGHAX)
+_DVS EQUS "${DVS}"
+	ld bc, _DVS
+else
 	call Random
 	ld b, a
 	call Random
 	ld c, a
+endc
 .initializeDVs
 	ld a, b
 	ld [de], a

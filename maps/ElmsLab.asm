@@ -190,11 +190,13 @@ TotodilePokeBallScript:
 	iftrue LookAtElmPokeBallScript
 	turnobject ELMSLAB_ELM, DOWN
 	refreshscreen
-	pokepic TOTODILE
-	cry TOTODILE
+	pokepic STARTER
+	cry STARTER
 	waitbutton
 	closepokepic
 	opentext
+	getmonname STRING_BUFFER_3, STARTER
+	getmontype STRING_BUFFER_4, STARTER
 	writetext TakeTotodileText
 	yesorno
 	iffalse DidntChooseStarterScript
@@ -203,12 +205,11 @@ TotodilePokeBallScript:
 	writetext ChoseStarterText
 	promptbutton
 	waitsfx
-	getmonname STRING_BUFFER_3, TOTODILE
 	writetext ReceivedStarterText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	promptbutton
-	givepoke TOTODILE, 5, BERRY
+	givepoke STARTER, 5, BERRY
 	closetext
 	applymovement PLAYER, AfterTotodileMovement
 	sjump ElmDirectionsScript
@@ -474,6 +475,12 @@ AideScript_GivePotion:
 	writetext AideText_GiveYouPotion
 	promptbutton
 	verbosegiveitem POTION
+if DEF(RNGHAX)
+	getitemname STRING_BUFFER_4, REPEL
+	scall AideScript_ReceiveTheBalls
+	giveitem REPEL, 5
+	promptbutton
+endc
 	writetext AideText_AlwaysBusy
 	waitbutton
 	closetext
@@ -494,13 +501,15 @@ AideScript_WalkBalls2:
 	applymovement ELMSLAB_ELMS_AIDE, AideWalksLeft2
 	end
 
+BALL_GIVEN EQU MASTER_BALL * DEF(RNGHAX) + POKE_BALL * !DEF(RNGHAX)
+
 AideScript_GiveYouBalls:
 	opentext
 	writetext AideText_GiveYouBalls
 	promptbutton
-	getitemname STRING_BUFFER_4, POKE_BALL
+	getitemname STRING_BUFFER_4, BALL_GIVEN
 	scall AideScript_ReceiveTheBalls
-	giveitem POKE_BALL, 5
+	giveitem BALL_GIVEN, 5
 	writetext AideText_ExplainBalls
 	promptbutton
 	itemnotify
@@ -863,9 +872,13 @@ TakeCyndaquilText:
 	done
 
 TakeTotodileText:
-	text "ELM: Do you want"
-	line "TOTODILE, the"
-	cont "water #MON?"
+	text "ELM: You'll take"
+	line "@"
+	text_ram wStringBuffer3
+	text ", the"
+	cont "@"
+	text_ram wStringBuffer4
+	text " #MON?"
 	done
 
 TakeChikoritaText:

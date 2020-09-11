@@ -37,7 +37,10 @@ Marts:
 .End
 
 MartCherrygrove:
-	db 4 ; # items
+	db 4 + DEF(RNGHAX) ; # items
+if DEF(RNGHAX)
+	db REPEL
+endc
 	db POTION
 	db ANTIDOTE
 	db PARLYZ_HEAL
@@ -45,7 +48,10 @@ MartCherrygrove:
 	db -1 ; end
 
 MartCherrygroveDex:
-	db 5 ; # items
+	db 5 + DEF(RNGHAX) ; # items
+if DEF(RNGHAX)
+	db REPEL
+endc
 	db POKE_BALL
 	db POTION
 	db ANTIDOTE
@@ -55,6 +61,9 @@ MartCherrygroveDex:
 
 MartViolet:
 	db 10 ; # items
+if DEF(RNGHAX)
+	db REPEL
+endc
 	db POKE_BALL
 	db POTION
 	db ESCAPE_ROPE
@@ -64,7 +73,9 @@ MartViolet:
 	db X_DEFEND
 	db X_ATTACK
 	db X_SPEED
+if !DEF(RNGHAX)
 	db FLOWER_MAIL
+endc
 	db -1 ; end
 
 MartAzalea:

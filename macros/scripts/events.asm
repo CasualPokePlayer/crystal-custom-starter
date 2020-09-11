@@ -1062,3 +1062,10 @@ ENDM
 checksave: MACRO
 	db checksave_command
 ENDM
+
+	const getmontype_command ; $aa
+getmontype: MACRO
+	db getmontype_command
+	db \2 ; pokemon
+	db \1 ; string_buffer
+ENDM
